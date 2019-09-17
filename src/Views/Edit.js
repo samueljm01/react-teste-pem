@@ -6,6 +6,8 @@ import Label from "../Components/Label";
 import { getUserById } from "../Actions/Users";
 import Button from "../Components/Button";
 import { editUser, createUser } from "../Actions/Users";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const initialState = {
   id: 0,
@@ -31,7 +33,11 @@ const initialState = {
   }
 };
 
+toast.configure()
+
 const Edit = ({ match }) => {
+  const notify = (text) => toast(text);
+
   const [user, setUser] = useState({ ...initialState });
 
   const initAsync = async () => {
@@ -66,8 +72,10 @@ const Edit = ({ match }) => {
   const onSave = async () => {
     if (user.id > 0) {
       await editUser(user.id, user);
+      notify('Usuario editado!')
     } else {
       await createUser(user);
+      notify('Usuario criado!')
     }
   };
 

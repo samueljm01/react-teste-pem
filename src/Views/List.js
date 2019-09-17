@@ -4,8 +4,13 @@ import { withRouter } from "react-router-dom";
 import Title from "../Components/Title";
 import { getUsers, deleteUser } from "../Actions/Users";
 import Button from "../Components/Button";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+toast.configure()
 
 const List = props => {
+  const notify = (text) => toast(text);
   const [users, setUsers] = useState([]);
 
   const initAsync = async () => {
@@ -15,7 +20,7 @@ const List = props => {
 
   const onDelete = async id => {
     await deleteUser(id);
-    alert("Usuario deletado.");
+    notify('Usuario deletado')
     setUsers([
         ...users.filter(e => e.id !== id)
     ])

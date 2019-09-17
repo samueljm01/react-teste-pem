@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Button from "./Button";
+import Loading from "./Loading"
 
 const Wrapper = styled.ul`
   padding: 0;
@@ -30,8 +31,8 @@ export default ({ items, onDelete }) => {
   return (
     <Wrapper>
       {items.length === 0 ? (
-        <div>Carregando</div>
-      ) : (
+        <Loading color="red" type="spin"/>
+        ) : (
         items.map((item, index) => {
           return (
             <Item key={index}>
